@@ -55,7 +55,7 @@ div.all_tabs > div.tab > a
 div.all_tabs > div.tab > a > img.tab-icon
 {
   position: relative; 
-  top: -6px;
+  top: -3px;
   height: 24px;           /* Make the icon fit regardless of source image size */
   width: 24px;            /* Make the icon fit regardless of source image size */
   vertical-align: top;
@@ -153,4 +153,13 @@ div.all_tabs > div.tab:target > div.container, :target #about > div.container
 div.all_tabs > div.tab :target
 {
   outline: none;
+}
+
+/**
+	* This is the background color that informs users that the input field is remembered via cookie.
+	* Clear the style to remove the chroma code.
+	*/
+.remembered_input
+{
+	background: #BBFFBB;
 }
