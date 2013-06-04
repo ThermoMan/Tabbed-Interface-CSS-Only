@@ -1,0 +1,97 @@
+/**
+	* A modification to the original tabs with the intent to isolate the color pieces
+	*
+	* Code by
+  ______ __                                   __  ___
+ /_  __// /_   ___   _____ ____ ___   ____   /  |/  /____ _ ____
+  / /  / __ \ / _ \ / ___// __ `__ \ / __ \ / /|_/ // __ `// __ \
+ / /  / / / //  __// /   / / / / / // /_/ // /  / // /_/ // / / /
+/_/  /_/ /_/ \___//_/   /_/ /_/ /_/ \____//_/  /_/ \__,_//_/ /_/
+	*/
+
+
+
+/* Visually connect tab and tab body (border around tabs and between tabs and body) */
+div.all_tabs > div.tab > a
+{
+  color: black;                       /* Makes it look more like a button than a link */
+	border-color: #E4E4E4;							/* This is color for left, top, and right of tab */
+}
+
+
+/**
+	*  These next three classes distinguish between the 4 states a tab can be in.
+	*
+	* Selected                - this one tab had the emphasis color.
+	* Inactive (Not selected) - all of the other tabs are other color.
+	* Mouse over              - this one tab is hilighted in another.
+	* Disabled                - This tab is unclickable (has no link).  This is not yet implemented.
+	*
+	* The CSS does not change position or anything else, just the appearance of the tab.
+	*/
+
+/* Inactive tabs color */
+div.all_tabs > div.tab:not(:target) > a
+{
+  color: #999999;															/* Set inactive tab title font color. */
+  /* background-color: #E4E4E4; */
+	background-image: linear-gradient( 135deg, #DFDFDF 33%, #CFCFCF 66% );
+
+/* from here: http://www.colorzilla.com/gradient-editor/ */
+}
+
+/* Mouse over tab is hilighted */
+div.all_tabs > div.tab:not(:target) > a:hover
+{
+  /* background-color: #5DC670;	*/								/* Set mouse-over tab color. */
+	background-image: linear-gradient( 135deg, #F4F4F4 33%, #E4E4E4 66%); 
+
+/*
+background: #F5F5F5; 
+background: -moz-linear-gradient(-45deg,  #F5F5F5 42%, #E5E5E5 86%); 
+background: -webkit-gradient(linear, left top, right bottom, color-stop(42%,#F5F5F5), color-stop(86%,#E5E5E5)); 
+background: -webkit-linear-gradient(-45deg,  #F5F5F5 42%,#E5E5E5 86%); 
+background: -o-linear-gradient(-45deg,  #F5F5F5 42%,#E5E5E5 86%); 
+background: -ms-linear-gradient(-45deg,  #F5F5F5 42%,#E5E5E5 86%); 
+background: linear-gradient(135deg,  #F5F5F5 42%,#E5E5E5 86%); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F5F5F5', endColorstr='#E5E5E5',GradientType=1 ); 
+*/
+
+
+}
+
+/* Selected tab color */
+div.all_tabs > div.tab:target > a,						/* Apply to the targeted item or... */
+:target #default2 > a
+{																							/* ... to the default item */
+	border-bottom-color: #E4E4E4;
+  color: #999999;															/* Set active tab title font color. */
+  background-color: #FFFFFF;									/* Set active tab background color. */
+}
+
+/**
+	* Container for toolbar and contents - nothing else should be in here - this is the thing who's z-order should shift
+	*/
+div.all_tabs > div.tab > div.container
+{
+  background-color: #CCCCCC;									/* #CCCCCC is light gray.  This is global for all tabs and toolbars unless overridden*/
+	border-color: #E0E0E0;
+}
+
+/** 
+	* Set up a toolbar for contents of the tab - this is technically inside the section described immediately above 
+	*/
+div.all_tabs > div.tab > div.container > div.tab-toolbar
+{
+  background-color: #E4E4E4;
+}
+
+/**
+	* This is the background color that informs users that the input field is remembered via cookie.
+	* Clear the style to remove the chroma code.
+	*/
+.remembered_input
+{
+  background-color: #BBFFBB;	/* original color from old code */
+  background-color: #555555;	/* get your attention color that something needs to be done here in the code */
+}
