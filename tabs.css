@@ -16,6 +16,14 @@
   */
 
 
+@font-face
+{
+	font-family: 'theToolbarFonts';
+	src: local( 'Arial' );	/* A common font for use in the demo, you may want to use another choice in your applicaiton. */
+	/* Here is how to use some other font */
+	/* src: local( 'Copperplate Gothic Light' ), url( '../fonts/Copperplate_Gothic_Light.ttf' ) format( 'truetype' ); */
+}
+
 /* All color references have been moved to a separate CSS file so that appearance and function are isolated from each other */
 
 /**
@@ -26,6 +34,9 @@ div.all_tabs
 	position: relative;										/* Wherever it may fall on the page */
 	line-height: 1em;											/* Easier to calculate with */
 	z-index: 0;														/* So that we can put other things behind */
+  /* No, actually these do NOT stop text hiding behind the tabs panel */
+	/*float: left;*/													/* These two commands stop page text from hiding behind the tabs */
+	/*margin: 50px;*/													/* These two commands stop page text from hiding behind the tabs */
 }
 
 /**
@@ -39,9 +50,14 @@ div.all_tabs > div.tab
 
 /* Visually connect tab and tab body (border around tabs and between tabs and body) */
 div.all_tabs > div.tab > a
-{
-	padding: 0.0em 0.3em 0.2em 0.3em;			/* Some breathing space - space around tab title text - leave gap between button and content (see below) */
+{        /* top right bottom left */
+	padding: 0.6em 0.4em 0.4em 0.4em;			/* Some breathing space - space around tab title text - leave gap between button and content (see below) */
+	/* Works in Chrome:  padding: 0.6em 0.4em 0.5em 0.4em; */
+	/* Works in Firefox: padding: 0.6em 0.4em 0.4em 0.4em; */
+
 	border: 0.15em outset;								/* Gives the tab a 3Dish effect */
+	font-family: 'theToolbarFonts', Gadget, sans-serif;	/* This font choice impacts the padding-bottom choice (see above) */
+	font-size: 0.6em;											/* This size choice impacts the padding-bottom choice (see above) */
 	/* border-bottom does not matter because it is superceded later to show which tab is selected */
 	/* border-bottom: 0.1em solid; */
 }
@@ -71,6 +87,15 @@ div.all_tabs > div.tab > a > img.tab-icon
 	* The CSS does not change position or anything else, just the appearance of the tab.
 	*/
 
+/* Selected tab */
+div.all_tabs > div.tab:target > a,			/* Apply to the targeted item or... */
+:target #default2 > a
+{																				/* ... to the default item */
+	border-bottom: 0.1em solid;						/* Visually connect tab and tab body - remove gap between button and content (see above) */
+	border-radius: 8px 8px 0px 0px;       /* Tab border is rounded */
+	text-decoration:  none;               /* Remove underline from href */
+}
+
 /* Inactive tabs */
 div.all_tabs > div.tab:not(:target) > a
 {
@@ -82,17 +107,18 @@ div.all_tabs > div.tab:not(:target) > a
 /* Mouse over tab is hilighted */
 div.all_tabs > div.tab:not(:target) > a:hover
 {
-	border-bottom: none;									/* Make the bottom border disappear */
-	border-radius: 8px 8px 0px 0px;				/* Tab border is rounded */
+	/* border-bottom: none; */									/* Make the bottom border disappear */
+	/* border-radius: 8px 8px 0px 0px; */				/* Tab border is rounded */
 }
 
-/* Selected tab */
-div.all_tabs > div.tab:target > a,			/* Apply to the targeted item or... */
-:target #default2 > a
-{																				/* ... to the default item */
-	border-bottom: 0.1em solid;						/* Visually connect tab and tab body - remove gap between button and content (see above) */
-	border-radius: 8px 8px 0px 0px;       /* Tab border is rounded */
-	text-decoration:  none;               /* Remove underline from href */
+/* Disabled tab appearance */
+/* At present there is no disabled tab - the easy way to disable it is to hide the whole thing. */
+
+/* Apply to the space between the tabs */
+div.all_tabs > div.tab_gap
+{
+	display: inline;
+	padding-left: 1px;
 }
 
 /**
@@ -105,7 +131,7 @@ div.all_tabs > div.tab > div.container
 	width: 840px;													/* Set the horizontal width of the tab content area */
 	height: 460px;												/* This sets the vertical height of the tab content area - regardless of the content vertical height */
 	z-index: -2;													/* Behind, because the borders overlap */
-	overflow: hidden;
+	overflow: hidden;											/* Do not allow overflow to show - be very careful in what is placed in the toolbar */
 }
 
 /** 
@@ -118,26 +144,83 @@ div.all_tabs > div.tab > div.container > div.tab-toolbar
 	height: 30px;													/* Tall enough that wierd elements don't make it grow */
 	display: table-cell;
 	vertical-align: middle;
-	font-family: 'Arial Black', Gadget, sans-serif;	/* A common font */
-	font-size: 0.6em;
-	overflow: hidden;
+	font-family: 'theToolbarFonts', Gadget, sans-serif;	/* This font choice impacts the padding-bottom choice (see above) */
+	font-size: 0.6em;											/* This size choice impacts the padding-bottom choice (see above) */
+	overflow: hidden;											/* Do not allow overflow to show - be very careful in what is placed in the toolbar */
 }
 
-/* This CSS styles the CONTENTS of the ACTIVE tab */
+/* BEGIN -- This is a work in progress to change the appearance of controls and text on the toolbar */
+/**
+	* Set style/appearance of text on controls in the toolbar
+	*/
+div.all_tabs > div.tab > div.container > div.tab-toolbar > select,
+div.all_tabs > div.tab > div.container > div.tab-toolbar > input
+{
+	vertical-align: middle;
+	font-family: 'theToolbarFonts';
+	font-size: 1em;
+}
+
+/**
+	* Set style/appearance of controls in the toolbar
+	*
+	* Specifically for checkbox - unchecked look
+	*/
+div.all_tabs > div.tab > div.container > div.tab-toolbar > input[type='checkbox']
+{
+	/* width: 21px; */
+	/* height: 21px; */
+	/* background: url( '../images/CheckBox.png' ) 21px 0px; */
+	/* The image came form this site... */
+	/* http://www.dailycoding.com/Posts/customized_html_controls_creating_custom_checkbox.aspx */
+	/* cursor: crosshair; */
+	padding: 0px;
+  margin: 0px;
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+
+/**
+	* Specifically for checkbox - checked look
+	*/
+div.all_tabs > div.tab > div.container > div.tab-toolbar > input[type='checkbox']:checked
+{
+	/* background: url( 'images/CheckBox.png' ) 0px 0px; */
+	/* cursor: crosshair;  */
+	/* crosshair, progress, wait */
+}
+/* END -- This is a work in progress to change the appearance of controls and text on the toolbar */
+
+/* This CSS styles the CONTENTS of the tabs (only visible on the Selected tab - duh) */
 div.all_tabs > div.tab > div.container > div.content
 {
-	width: inherit;
-	height: 427px;												/* This requires computation content = container - toolbar - border */
-	overflow: auto;												/* Scroll bar if needed */
+	/* The scroll bars are placed INSIDE the div which effectively narrows the text area by several px */
+	overflow-y: auto;											/* Scroll bar if needed */
+
+	height: 427px;												/* Requires computation height = container-height - toolbar-height - border-height */
+	/* Will cause tabs that don't have a toolbar to be toolbar height (presently 30px) short at the bottom */
+	/* 427 = 460 - 30 - 3*/
+	
+	/* To use the left/right modifiers the width must be computed instead of inherited */
+	/*margin-left: 10px;*/
+	padding-left: 10px;
+	padding-right: 10px;
+	/*width: inherit;*/
+	width: 820px;													/* Requires computation width = container-width - padding-left - padding-right */
+	/* 820 = 840 - 10 - 10 */
 }
 
-/* All these DIVs overlap */
+/**
+  * All the DIVs for content overlap with each other and are hidden/shown by changing the z-index
+  */
 div.all_tabs > div.tab:not(:target) > div.container
 { /* Protect CSS1 & CSS2 browsers (I will remove this code in the next revision if it really is only for those old browsers) */
 	position: absolute;
 }
 
-/* Raise select tab content above the content of the other tabs */
+/**
+  * Raise Select tab content above the other tabs so that you can see it
+  */
 div.all_tabs > div.tab:target > div.container, :target #about > div.container
 {
 	position: absolute;										/* All these DIVs should overlap completely with each other */
@@ -150,6 +233,16 @@ div.all_tabs > div.tab :target
 }
 
 /**
+  * BEGIN -- This is a work in progress to have visual indicator that a value was saved in a cookie
+	*
+  * This was largely a failed experiment.
+  * You simply CANNOT set the background color of an HTML input element (like the checkbox)
+  * without having to go into the entire effort of having to create a whole set of inputs yhourself.
+	*
+	* Browsers default these elements to the appearance of the OS on which they live and actively resist change.
+  */
+
+/**
 	* This is the background color that informs users that the input field is remembered via cookie.
 	* Clear the style to remove the chroma code.
 	*/
@@ -157,3 +250,5 @@ div.all_tabs > div.tab :target
 {
 	/* background: #BBFFBB; */
 }
+
+/* END -- This is a work in progress to have visual indicator that a value was saved in a cookie */

@@ -9,7 +9,11 @@
 /_/  /_/ /_/ \___//_/   /_/ /_/ /_/ \____//_/  /_/ \__,_//_/ /_/
 	*/
 
-
+/* For the tab border color to be white, the page background needs to be non-white or it just disappears. */
+body
+{
+	background-color: #B0C4DE;
+}
 
 /* Visually connect tab and tab body (border around tabs and between tabs and body) */
 div.all_tabs > div.tab > a
@@ -30,12 +34,24 @@ div.all_tabs > div.tab > a
 	* The CSS does not change position or anything else, just the appearance of the tab.
 	*/
 
+/* Selected tab color */
+div.all_tabs > div.tab:target > a,						/* Apply to the targeted item or... */
+:target #default > a													/* ... to the default item          */
+{
+	/* border-bottom-color: #E4E4E4; */
+	border-bottom-color: #FFFFFF;								/* Border bottom color is tricky.  If there is a toolbar it should match */
+																							/* the toolbar, otherwise it shuold match the tab body background color  */
+																							/* (or perhaps the frame color)                                          */
+
+  color: #999999;															/* Set active tab title font color. */
+  background-color: #FFFFFF;									/* Set active tab background color. */
+}
+
 /* Inactive tabs color */
 div.all_tabs > div.tab:not(:target) > a
 {
-  color: #999999;															/* Set inactive tab title font color. */
-  /* background-color: #E4E4E4; */
-	background-image: linear-gradient( 135deg, #DFDFDF 33%, #CFCFCF 66% );
+	/* No change to font color */
+	background-image: linear-gradient( 0deg, #CFCFCF 33%, #F2F2F2 66% );	/* Set inactive tab color. */
 
 /* from here: http://www.colorzilla.com/gradient-editor/ */
 }
@@ -43,30 +59,8 @@ div.all_tabs > div.tab:not(:target) > a
 /* Mouse over tab is hilighted */
 div.all_tabs > div.tab:not(:target) > a:hover
 {
-  /* background-color: #5DC670;	*/								/* Set mouse-over tab color. */
-	background-image: linear-gradient( 135deg, #F4F4F4 33%, #E4E4E4 66%); 
-
-/*
-background: #F5F5F5; 
-background: -moz-linear-gradient(-45deg,  #F5F5F5 42%, #E5E5E5 86%); 
-background: -webkit-gradient(linear, left top, right bottom, color-stop(42%,#F5F5F5), color-stop(86%,#E5E5E5)); 
-background: -webkit-linear-gradient(-45deg,  #F5F5F5 42%,#E5E5E5 86%); 
-background: -o-linear-gradient(-45deg,  #F5F5F5 42%,#E5E5E5 86%); 
-background: -ms-linear-gradient(-45deg,  #F5F5F5 42%,#E5E5E5 86%); 
-background: linear-gradient(135deg,  #F5F5F5 42%,#E5E5E5 86%); 
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F5F5F5', endColorstr='#E5E5E5',GradientType=1 ); 
-*/
-
-
-}
-
-/* Selected tab color */
-div.all_tabs > div.tab:target > a,						/* Apply to the targeted item or... */
-:target #default2 > a
-{																							/* ... to the default item */
-	border-bottom-color: #E4E4E4;
-  color: #999999;															/* Set active tab title font color. */
-  background-color: #FFFFFF;									/* Set active tab background color. */
+	/* No change to font color */
+	background-image: linear-gradient( 0deg, #FAFAFA 33%, #C2C2C2 66% );	/* Set mouse-over tab color. */
 }
 
 /**
@@ -74,8 +68,9 @@ div.all_tabs > div.tab:target > a,						/* Apply to the targeted item or... */
 	*/
 div.all_tabs > div.tab > div.container
 {
-  background-color: #CCCCCC;									/* #CCCCCC is light gray.  This is global for all tabs and toolbars unless overridden*/
+  background-color: #CCCCCC;									/* #CCCCCC is light gray.  This is global for all tabs and toolbars unless overridden */
 	border-color: #E0E0E0;
+	border-color: #FFFFFF;
 }
 
 /** 
@@ -83,7 +78,7 @@ div.all_tabs > div.tab > div.container
 	*/
 div.all_tabs > div.tab > div.container > div.tab-toolbar
 {
-  background-color: #E4E4E4;
+  background-color: #FFFFFF;	/* Match the color of the Selected tab */
 }
 
 /**

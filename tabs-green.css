@@ -32,6 +32,15 @@ div.all_tabs > div.tab > a
 	* The CSS does not change position or anything else, just the appearance of the tab.
 	*/
 
+/* Selected tab is dark green */
+div.all_tabs > div.tab:target > a,			/* Apply to the targeted item or... */
+:target #default > a										/* ... to the default item          */
+{
+	border-bottom-color: #448873;
+  color: #FFFFFF;												/* Set active tab title font color to white for emphasis, but not bold as it moves the tabs */
+  background-color: #448873;						/* Set color of selected tab title. */
+}
+
 /* Inactive tabs color */
 div.all_tabs > div.tab:not(:target) > a
 {
@@ -43,15 +52,6 @@ div.all_tabs > div.tab:not(:target) > a
 div.all_tabs > div.tab:not(:target) > a:hover
 {
 	background-color: #5DC670;						/* Set mouse-over color to be a brighter green */
-}
-
-/* Active tab is dark green */
-div.all_tabs > div.tab:target > a,			/* Apply to the targeted item or... */
-:target #default2 > a
-{																				/* ... to the default item */
-	border-bottom-color: #448873;
-  color: #FFFFFF;												/* Set active tab title font color to white for emphasis, but not bold as it moves the tabs */
-  background-color: #448873;						/* Set color of selected tab title. */
 }
 
 /**
